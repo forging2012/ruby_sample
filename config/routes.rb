@@ -1,13 +1,18 @@
 Rails.application.routes.draw do
 
+
  #首页
   root 'static_pages#home'
   
-  get 'static_pages/help'
+  # 给路由定一个别名
+  get 'help' => 'static_pages#help'
 
-  get 'static_pages/about'
+  get 'about' => 'static_pages#about'
 
-  get 'static_pages/contact'
+  get 'contact' => 'static_pages#contact'
+
+  # 用户登录模块
+  get 'signup' => 'users#new'
 
 
 
