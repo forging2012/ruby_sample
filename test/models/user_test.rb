@@ -5,7 +5,7 @@ class UserTest < ActiveSupport::TestCase
   #   assert true
   # end
   def setup
-  	@user = User.new(name: 'fugeng', email: '223328084@qq.com')
+  	@user = User.new(name: 'fugeng', email: '223328084@qq.com', password: '63292590', password_confirmation: '63292590')
   	
   end
 
@@ -55,5 +55,25 @@ class UserTest < ActiveSupport::TestCase
   		assert_not @user.valid? "#{valid_address.inspect} should be invalid"
   	end
   end
+
+  # 验证email是否唯一
+  test "email address should be unquie" do
+  	# 由于就算是大小写不同 只要字母全相同 也算同一个地址 所以需要将大小写进行统一转化
+  	duplicate_user = @user.dup
+  	duplicate_user.email = @user.email.upcase
+  	# user存入之后 如果做了唯一性验证 那么duplicate_user的验证应该是无法通过
+  	@user.save
+  	assert_not duplicate_user.valid?
+
+  end
+
+  # 测试密码的最短长度是否有效
+  test "password should be have a minimum" do
+  	@user.password = @user.password_confirmation = 'a' * 5
+  	assert_not @user.valid?
+  end
+
+
+
 
 end

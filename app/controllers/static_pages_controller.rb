@@ -1,7 +1,7 @@
 class StaticPagesController < ApplicationController
   def home
   	# render text: 'hello'
-  	test = { name: 'cc', dis_nam: 'dd'}
+    User.all
   end
 
   def help
