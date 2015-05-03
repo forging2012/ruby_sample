@@ -12,7 +12,8 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
   		post users_path, user: { name: '', email: '223328084@qq.com', password: '63292590', password_confirmation: '63292590' }
   	end
  	#判断模板是否正确
- 	assert_template 'users/new' 
+ 	assert_template 'users/new'
+
   end
 
   # 成功注册
@@ -33,5 +34,6 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
   	end
   	assert_template 'users/show'
 
+    assert flash
   end
 end
