@@ -8,5 +8,8 @@ class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   fixtures :all
 
-  # Add more helper methods to be used by all tests here...
+  # 判断用户是否已经登录
+  def is_log_in?
+  	!session[:user_id].nil?
+  end
 end

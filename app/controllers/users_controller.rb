@@ -12,6 +12,8 @@ class UsersController < ApplicationController
 
   	 # debugger
   	if @user.save
+      # 将用户信息存到session
+      log_in @user
   		# 重定向到用户详情页
   		flash[:success] = "Welcome to the Sample App!"
   		redirect_to @user

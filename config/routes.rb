@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
 
+
  #首页
   root 'static_pages#home'
   
@@ -15,6 +16,11 @@ Rails.application.routes.draw do
   get 'signup' => 'users#new'
 
   resources :users
+
+  # 登录路由
+  get 'login' => 'session#new'
+  post 'login' => 'session#create'
+  delete 'logout' => 'session#destroy'
 
 
 
