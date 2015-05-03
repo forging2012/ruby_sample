@@ -73,7 +73,13 @@ class UserTest < ActiveSupport::TestCase
   	assert_not @user.valid?
   end
 
-
+  # 测试email是否会自动转化为小写
+  test "email should be saved lower-case " do
+  	email = 'FOAFSA@qq.com'
+  	@user.email = email
+  	@user.save
+  	assert_equal email.downcase, @user.reload.email
+  end
 
 
 end

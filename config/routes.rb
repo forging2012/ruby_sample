@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   # 用户登录模块
   get 'signup' => 'users#new'
 
+  resources :users
+
 
 
 end
