@@ -5,7 +5,7 @@ class UserTest < ActiveSupport::TestCase
   #   assert true
   # end
   def setup
-  	@user = User.new(name: 'fugeng', email: '223328084@qq.com', password: '63292590', password_confirmation: '63292590')
+  	@user = User.new(name: 'fugen', email: '123328084@qq.com', password: '63292590', password_confirmation: '63292590')
   	
   end
 
@@ -81,5 +81,9 @@ class UserTest < ActiveSupport::TestCase
   	assert_equal email.downcase, @user.reload.email
   end
 
+  # 如果用户没登录 那么使用auth验证应该返回false
+  test "authenticated? invalid should be return false" do
+    assert_not @user.authenticated?('')
+  end
 
 end

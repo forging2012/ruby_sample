@@ -7,7 +7,7 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
 
   def setup
     # 使用users固件 定义再fixtures/users.yml
-    @user = users(:michael)
+    @user = users(:fugeng)
   end
 
   test "login with invalid information" do
@@ -42,6 +42,31 @@ class UsersLoginTest < ActionDispatch::IntegrationTest
     assert_select "a[href=?]", user_path(@user)
 
     assert is_log_in?
+  end
+
+  # 测试退出功能
+  test "login with valid information follow by logout" do
+
+    get login_path
+    # 传送有效登录数据 由于在这里传送数据时无法哈希 而定义固件时必须存入哈希过的值 因此固件中用户密码全都约定为password
+    post login_path, session:{ email: @user.email, password: 'password' }
+    assert is_log_in?
+    assert_redirected_to @user
+    follow_redirect!
+    assert_template 'users/show'
+    assert_select "a[href=?]", login_path, count: 0
+    assert_select "a[href=?]", logout_path
+    assert_select "a[href=?]", user_path(@user)
+    #登出操作 
+    delete logout_path
+    assert_not is_log_in?
+    assert_redirected_to root_url
+    # 模拟已经登出的状态下 再次登出 正常情况下是不允许的 
+    delete logout_path
+    follow_redirect!
+    assert_select "a[href=?]", login_path
+    assert_select "a[href=?]", logout_path, count:0
+    assert_select "a[href=?]", user_path(@user), count: 0
   end
 
 end
