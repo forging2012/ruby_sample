@@ -14,7 +14,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
  	#判断模板是否正确
  	assert_template 'users/new'
 
-  end
+  end 
 
   # 成功注册
   test "valid signup information" do
@@ -25,6 +25,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
   	email = 'user@example.com'
 
   	assert_difference 'User.count', 1 do
+      # 提交数据后 重定向渲染模板
   		post_via_redirect users_path, user: {
 					  							name: name,
 					  							password_confirmation: password_confirmation,

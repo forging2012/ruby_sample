@@ -11,8 +11,9 @@ module SessionHelper
 		if (user_id = session[:user_id])
 			@current_user ||= User.find_by(id: user_id)
 		elsif (user_id = cookies.signed[:user_id])
+       # raise  #调用这个方法后 如果单元测试覆盖到这部分代码 那么会抛出异常 测试通过 代表没有覆盖部分代码
 			user = User.find_by(id: user_id)
-			if user && user.authenticated?(cookies.signed[:remember_token])
+			if user && user.authenticated?(cookies[:remember_token])
 				log_in user
 				@current_user = user
 			end
@@ -38,7 +39,7 @@ module SessionHelper
 		user.remember
 		# 将用户Id和remember_token 加密后 存入cookie
 		cookies.permanent.signed[:user_id] = user.id  #permanet是永久的意思 cookies指定时可以指定expire
-		cookies.permanent.signed[:remember_token] = user.remember_token
+		cookies.permanent[:remember_token] = user.remember_token
 	end
 
   # 忘记用户
