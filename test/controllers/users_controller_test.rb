@@ -51,4 +51,29 @@ class UsersControllerTest < ActionController::TestCase
     assert_redirected_to login_url
   end
 
+  # 测试用户没登录访问删除方法
+  test "should redirect destroy when not logged in" do
+    assert_no_difference 'User.count' do
+      delete :destroy, id: @user
+    end
+    assert_redirected_to login_url
+  end
+
+  # 测试非管理员用户访问删除方法
+  test "should redirect destroy when not admin" do
+    log_in_as(@other_user)
+    assert_no_difference 'User.count' do
+      delete :destroy, id: @user
+    end
+    assert_redirected_to root_url
+  end
+
+  # 无法修改admin属性
+  test "should not allow the admin attribute to be edited via the web" do
+    log_in_as(@other_user)
+    patch :update, id: @user, user:{
+      admin: true
+    }
+    assert_not @other_user.admin?
+  end
 end

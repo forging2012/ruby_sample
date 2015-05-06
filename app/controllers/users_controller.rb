@@ -1,9 +1,11 @@
 class UsersController < ApplicationController
     
   # 事前过滤器 这个过滤器表示在使用edit update方法前 要调用logged_in_user方法
-  before_action :logged_in_user, only:[:edit, :update, :index]
+  before_action :logged_in_user, only:[:edit, :update, :index, :destroy]
   # 验证是否为正确的用户登录
   before_action :correct_user, only:[:edit, :update]
+  # 删除功能只能有管理员来操作
+  before_action :admin_user, only:[:destroy]
 
   def new
 
@@ -11,6 +13,11 @@ class UsersController < ApplicationController
 
   end
 
+  def destroy
+    User.find(params[:id]).destroy
+    flash[:success] = '删除成功'
+    redirect_to users_url
+  end
 
   def index
 
@@ -80,6 +87,11 @@ class UsersController < ApplicationController
   def correct_user
     @user = User.find(params[:id])
     redirect_to(root_url) unless current_user?(@user)
+  end
+
+  # 确保为管理员用户
+  def admin_user
+    redirect_to root_url unless current_user.admin?
   end
 
 end

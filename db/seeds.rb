@@ -3,7 +3,8 @@ User.create!(
   name: 'fugeng',
   email: '223328084@qq.com',
   password: '63292590',
-  password_confirmation: '63292590'
+  password_confirmation: '63292590',
+  admin: true
 )
 
 99.times do |n|

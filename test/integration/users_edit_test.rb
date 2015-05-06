@@ -22,7 +22,7 @@ class UsersEditTest < ActionDispatch::IntegrationTest
     assert_template 'users/edit'
   end
 
-  # 更新成功测试 并且实现友好条状
+  # 更新成功测试 并且实现友好跳转
   test "successful test with friendly forward" do
     # 友好跳转 即登录后访问原本登录前想访问的url
     get edit_user_path(@user)
@@ -46,6 +46,17 @@ class UsersEditTest < ActionDispatch::IntegrationTest
 
   end
 
+  # 测试友好跳转只在首次登录的时候转向指定地址 以后都会转向默认地址
+  test "successful test with friendly forward when user fist login" do
+    get edit_user_path(@user)
+    log_in_as(@user)
+    assert_redirected_to edit_user_path(@user)
+    # 登出
+    delete logout_url
+    log_in_as(@user)
+    assert_redirected_to @user
+    assert_not session[:forwarding_url]
+  end
 
 
 end

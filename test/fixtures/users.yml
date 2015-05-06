@@ -6,6 +6,7 @@ fugeng:
   name: fugeng
   email: 223328084@qq.com
   password_digest: <%= User.digest('password') %>
+  admin: true
 mizi:
   name: mizi
   email: 223328084@gmail.com
