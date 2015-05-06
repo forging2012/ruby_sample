@@ -13,7 +13,7 @@ class SessionController < ApplicationController
       # 是否选择 记住我 操作
       params[:session][:remember_me] == '1' ? remember(@user) : forget(@user)
   		# 登录成功 重定向到用户页面
-  		redirect_to user_url(@user)
+  		redirect_back_or @user
   	else
   		# 错误信息闪现 .now方法是在render重新渲染专用的闪现方法 可以避免闪现消息在跳转其他页面时不消失的bug
   		flash.now[:danger] = '邮箱/密码错误'

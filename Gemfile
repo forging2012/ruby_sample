@@ -43,6 +43,9 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'faker', '1.4.2'
+  gem 'will_paginate', '3.0.7'
+  gem 'bootstrap-will_paginate', '0.0.10'
   gem 'pg', '0.17.1'
   group :test do
     gem 'minitest-reporters', '1.0.5'

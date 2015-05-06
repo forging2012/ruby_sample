@@ -6,3 +6,14 @@ fugeng:
   name: fugeng
   email: 223328084@qq.com
   password_digest: <%= User.digest('password') %>
+mizi:
+  name: mizi
+  email: 223328084@gmail.com
+  password_digest: <%= User.digest('password') %>
+
+<% 30.times do |n| %>
+user_<%= n %>:
+  name: <%= "User #{n}" %>
+  email: <%= "user-#{n}@example.com" %>
+  password_digest: <%= User.digest('password') %>
+<% end %>

@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 	validates :name, presence: true, length: { maximum: 50 }
 	validates :email, presence:true, length: { maximum:200 }, format: { with:VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
-	validates :password, length: { minimum: 6 }
+	validates :password, length: { minimum: 6 }, allow_blank: true # 允许修改时跳过密码的长度认证
 	has_secure_password
 
 	# 返回指定字符串的哈希摘要
