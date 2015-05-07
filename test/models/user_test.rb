@@ -83,7 +83,7 @@ class UserTest < ActiveSupport::TestCase
 
   # 如果用户没登录 那么使用auth验证应该返回false
   test "authenticated? invalid should be return false" do
-    assert_not @user.authenticated?('')
+    assert_not @user.authenticated?(:remember, '')
   end
 
 end

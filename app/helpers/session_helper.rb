@@ -13,7 +13,7 @@ module SessionHelper
 		elsif (user_id = cookies.signed[:user_id])
        # raise  #调用这个方法后 如果单元测试覆盖到这部分代码 那么会抛出异常 测试通过 代表没有覆盖部分代码
 			user = User.find_by(id: user_id)
-			if user && user.authenticated?(cookies[:remember_token])
+			if user && user.authenticated?(:remember, cookies[:remember_token])
 				log_in user
 				@current_user = user
 			end

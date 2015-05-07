@@ -4,7 +4,9 @@ User.create!(
   email: '223328084@qq.com',
   password: '63292590',
   password_confirmation: '63292590',
-  admin: true
+  admin: true,
+  activated: true,
+  activated_at: Time.zone.now
 )
 
 99.times do |n|
@@ -14,6 +16,8 @@ User.create!(
       name: name,
       email: email,
       password: 'password',
-      password_confirmation: 'password'
+      password_confirmation: 'password',
+      activated: true,
+      activated_at: Time.zone.now
     )
   end

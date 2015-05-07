@@ -30,14 +30,13 @@ class UsersController < ApplicationController
   	# render text: 'cc'
   	# @user = User.new(params[:user])  如果没有指定允许传入的字段 是无法直接使用这种方式进行初始化类
   	@user = User.new(user_params)
-
   	 # debugger
   	if @user.save
-      # 将用户信息存到session
-      log_in @user
-  		# 重定向到用户详情页
-  		flash[:success] = "Welcome to the Sample App!"
-  		redirect_to @user
+      # 发送激活邮件
+      UserMailer.account_activation(@user).deliver_now
+      flash[:info] = '请检查你的邮箱'
+      # 跳转到首页
+      redirect_to root_url
   	else
   		render 'new'
   	end

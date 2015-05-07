@@ -23,5 +23,7 @@ Rails.application.routes.draw do
   delete 'logout' => 'session#destroy'
 
 
+  # 邮件激活
+  resources :account_activations, only: [:edit]
 
 end
