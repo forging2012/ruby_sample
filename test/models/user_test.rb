@@ -86,4 +86,14 @@ class UserTest < ActiveSupport::TestCase
     assert_not @user.authenticated?(:remember, '')
   end
 
+  test "如果用户被删除，关联微博应该被删除" do
+    @user.save
+    # 保存用户微博
+    @user.micropost.create(content: '关联微博1')
+    assert_difference 'Micropost.count', -1 do
+      @user.destroy
+    end
+  end
+
+
 end
