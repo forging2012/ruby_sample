@@ -10,7 +10,7 @@ require 'mina/rvm'    # for rvm support. (http://rvm.io)
 #   repository   - Git repo to clone from. (needed by mina/git)
 #   branch       - Branch name to deploy. (needed by mina/git)
 
-set :domain, 'root@192.168.0.119'
+set :domain, 'root@192.168.0.103'
 set :deploy_to, '/var/www/ruby_sample'
 set :repository, 'https://github.com/gameFu/ruby_sample.git'
 set :branch, 'master'
