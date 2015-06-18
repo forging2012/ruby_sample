@@ -12,7 +12,7 @@ require 'mina/rvm'    # for rvm support. (http://rvm.io)
 
 set :domain, 'root@192.168.0.119'
 set :deploy_to, '/var/www/ruby_sample'
-set :repository, 'https://git.coding.net/fugeng/ruby_sample.git'
+set :repository, 'https://github.com/gameFu/ruby_sample.git'
 set :branch, 'master'
 
 # For system-wide RVM install.
