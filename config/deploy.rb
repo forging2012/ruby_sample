@@ -71,7 +71,7 @@ task :deploy => :environment do
 
     to :launch do
       queue "mkdir -p #{deploy_to}/#{current_path}/tmp/"
-      queue "chown -R www-data #{deploy_to}"
+      # queue "chown -R www-data #{deploy_to}"
       queue "touch #{deploy_to}/#{current_path}/tmp/restart.txt"
     end
   end
