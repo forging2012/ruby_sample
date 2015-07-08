@@ -10,18 +10,18 @@ ENV HOME /root
 
 CMD ["/sbin/my_init"]
 
-# 添加gemfile
+# 缓存gem，如果Gemfil没有改变将不会从源直接下载
 WORKDIR /tmp
 ADD ./Gemfile Gemfile
 ADD ./Gemfile.lock Gemfile.lock
 RUN bundle install
 
-#关闭nginx
+#启动nginx
 RUN rm -f /etc/service/nginx/down
-#设置新的nginx虚拟主机
+#配置nginx
 RUN rm /etc/nginx/sites-enabled/default
-#添加nginx配置文件
 ADD nginx.conf /etc/nginx/sites-enabled/webapp.conf
+
 #添加环境文件
 ADD nginx-env.conf /etc/nginx/main.d/nginx-env.conf
 # 创建项目目录
