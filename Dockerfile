@@ -30,7 +30,7 @@ RUN mkdir /home/app/webapp
 ADD . /home/app/webapp
 
 WORKDIR /home/app/webapp
-CMD ["rake asset:compile"]
+RUN rake asset:compile
 
 # 清楚产生的缓存文件
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
