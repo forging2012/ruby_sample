@@ -30,7 +30,9 @@ RUN mkdir /home/app/webapp
 ADD . /home/app/webapp
 
 WORKDIR /home/app/webapp
+# 如果你的rails应用不是前后端分离就应该加上这句
 RUN rake assets:precompile
+RUN rake db:migrate
 
 # 清楚产生的缓存文件
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
