@@ -26,6 +26,11 @@ ADD nginx.conf /etc/nginx/sites-enabled/webapp.conf
 
 #添加环境文件
 ADD nginx-env.conf /etc/nginx/main.d/nginx-env.conf
+#增加初始化运行脚本
+RUN mkdir -p /etc/my_init.d
+#Migrate
+ADD migrate.sh /etc/my_init.d/migrate.sh
+
 # 创建项目目录
 RUN mkdir /home/app/webapp
 # 将项目文件加入项目目录
