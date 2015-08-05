@@ -31,6 +31,7 @@ ADD nginx-env.conf /etc/nginx/main.d/nginx-env.conf
 RUN mkdir -p /etc/my_init.d
 #Migrate
 ADD migrate.sh /etc/my_init.d/migrate.sh
+RUN chmod +x /etc/my_init.d/migrate.sh
 
 # 创建项目目录
 RUN mkdir /home/app/webapp
